@@ -11,7 +11,7 @@ export const read = async () => {
     return new Promise((resolve, reject) => {
       fs.access(file, fs.constants.F_OK, (err) => {
         if (err) reject(new Error('FS operation failed'));
-        resolve(file);
+        resolve(true);
       });
     })
   }
