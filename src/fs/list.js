@@ -20,10 +20,8 @@ export const list = async () => {
   .then(() => {
     fs.readdir(dir, (err, files) => {
       if (err) throw err;
-      files.map( file => console.log(file) );
+      console.log(files);
     })
   })  
   .catch((err) => { throw err })
 };
-
-list();
