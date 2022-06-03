@@ -1,3 +1,9 @@
 export const parseArgs = () => {
-    // Write your code here 
+  const args = process.argv.slice(2);
+  const stringOfArgs = args
+  .map((el, i) => { if (i % 2 === 0) return `${el} is ${args[i + 1]}` })
+  .filter((el) => { return el != null })
+  .join(', ');
+
+  console.log(stringOfArgs);
 };
