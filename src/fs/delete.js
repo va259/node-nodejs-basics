@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import fsPromises from 'node:fs/promises';
 import path from 'node:path'; 
 import { fileURLToPath } from 'url';
 
@@ -9,17 +8,18 @@ const fileToRemove = path.join(__dirname, '/files', 'fileToRemove.txt');
 
 export const remove = async () => {
   const ensureExists = async (file) => {
-    return new Promise( (resolve, reject) => {
-      fsPromises.access(file, fs.constants.F_OK)
-      .then(() => resolve(true) )
-      .catch(() => reject('FS operation failed') )
+    return new Promise((resolve, reject) => {
+      fs.access(file, fs.constants.F_OK, (err) => {
+        if (err) reject(new Error('FS operation failed'));
+        resolve(file);
+      });
     })
   }
 
   ensureExists(fileToRemove)
   .then(() => {
     fs.rm(fileToRemove, (err) => {
-      if (err) throw err;
+      if (err) throw new Error('FS operation failed');
     })
   })
   .catch((err) => { throw err })
