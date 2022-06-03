@@ -1,4 +1,4 @@
-import fsPromises from 'node:fs/promises';
+import fs from 'node:fs';
 import path from 'node:path'; 
 import { fileURLToPath } from 'url';
 
@@ -10,18 +10,19 @@ const destDir = path.join(__dirname, '/files_copy');
 export const copy = async () => {
   const ensureExists = async (dir) => {
     return new Promise((resolve, reject) => {
-      fsPromises.access(dir)
-      .then(() => resolve(true))
-      .catch(() => reject("FS operation failed"))
+      fs.access(dir, (err) => {
+        if (err) reject(new Error('FS operation failed'));
+        resolve(true);
+      });
     })
   }
 
   ensureExists(srcDir)
   .then( () => {
-    fsPromises.cp(srcDir, destDir, {errorOnExist: true, force: false,
-      recursive: true}).catch(
-        () => console.error("FS operation failed")
-      )
+    fs.cp(srcDir, destDir, {errorOnExist: true, force: false, recursive: true}, 
+      (err) => {
+        if (err) throw new Error('FS operation failed');
+    })
   })
-  .catch( (err) => console.error(err) )
+  .catch((err) => { throw err })
 };
