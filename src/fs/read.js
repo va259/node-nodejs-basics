@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import fsPromises from 'node:fs/promises';
 import path from 'node:path'; 
 import { fileURLToPath } from 'url';
 
@@ -12,7 +11,7 @@ export const read = async () => {
     return new Promise((resolve, reject) => {
       fs.access(file, fs.constants.F_OK, (err) => {
         if (err) reject(new Error('FS operation failed'));
-        resolve(true);
+        resolve(file);
       });
     })
   }
@@ -26,5 +25,3 @@ export const read = async () => {
   })
   .catch((err) => {throw err})
 };
-
-read();
