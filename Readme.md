@@ -18,4 +18,5 @@ streams:write
 streams:transform
 zip:compress
 zip:decompress
+wt:worker
 ```
