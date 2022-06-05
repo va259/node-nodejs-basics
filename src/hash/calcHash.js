@@ -22,6 +22,7 @@ export const calculateHash = async () => {
     const hash = createHash('sha256')
       .update(data)
       .digest('hex');
+    console.log(hash);
     return hash;
   })
   .catch((err) => {throw err})
