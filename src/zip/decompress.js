@@ -6,15 +6,12 @@ import { createWriteStream, createReadStream } from 'node:fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const fileToCompress = path.join(__dirname, path.sep, 'files', 'fileToCompress.txt');
-const archive = path.join(__dirname, path.sep, 'files', 'archive.gz');
-
-const srcFile = createReadStream(archive);
-const destFile = createWriteStream(fileToCompress);
+const archive = createReadStream(path.join(__dirname, 'files', 'archive.gz'));
+const file = createWriteStream(path.join(__dirname, 'files', 'fileToCompress.txt'));
 const unzip = zlib.createUnzip();
 
 export const decompress = async () => {
-  pipeline(srcFile, unzip, destFile, (err) => {
+  pipeline(archive, unzip, file, (err) => {
     if (err) {
       console.error('An error occurred:', err);
       process.exitCode = 1;
