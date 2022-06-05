@@ -4,12 +4,12 @@ import { release, version } from 'node:os';
 import { createServer as createServerHttp } from "node:http";
 import { createRequire } from 'node:module'
 
-const require = createRequire(import.meta.url)
-const a = require('./files/a.json')
-const b = require('./files/b.json')
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const require = createRequire(import.meta.url);
+const a = require(path.join(__dirname, 'files', 'a.json'));
+const b = require(path.join(__dirname, 'files', 'b.json'));
 
 const random = Math.random();
 let unknownObject;
