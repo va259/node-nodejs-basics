@@ -1,3 +1,5 @@
+import path from 'node:path'; 
+import { fileURLToPath } from 'url';
 import { createReadStream } from "node:fs";
 import { stdout } from 'node:process';
 
