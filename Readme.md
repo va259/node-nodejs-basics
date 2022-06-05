@@ -1,6 +1,6 @@
 # Node.js basics
 
-##Clone the repo and run the scripts to check corresponding tasks:
+## Clone the repo and run the scripts with `npm run` to check the corresponding tasks:
 
 ```
 fs:create
