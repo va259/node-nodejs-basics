@@ -20,3 +20,5 @@ export const transform = async () => {
     err => { throw err }
   );
 };
+
+transform();
